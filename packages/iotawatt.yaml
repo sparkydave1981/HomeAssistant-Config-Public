@@ -1,0 +1,119 @@
+###   Connection to read power data from IoTaWatt Power Monitor
+
+sensor:
+  - platform: rest
+    name: IoTaWatt
+    json_attributes:
+      - inputs
+      - outputs
+    resource: http://192.168.0.16/status?inputs=yes&outputs=yes
+    value_template: '{{ value_json.inputs[0].Vrms }}v'
+    scan_interval: 5
+
+  - platform: template
+    sensors:
+      iotawatt_channel_1:
+        friendly_name: 'Grid Red Phase Power'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][1].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][1].Watts }}'
+
+      iotawatt_channel_2:
+        friendly_name: 'Grid White Phase Power'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][2].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][2].Watts }}'
+
+      iotawatt_channel_3:
+        friendly_name: 'Grid Blue Phase Power'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][3].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][3].Watts }}'
+
+      iotawatt_channel_4:
+        friendly_name: 'Light Circuits Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][4].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][4].Watts }}'
+
+      iotawatt_channel_5:
+        friendly_name: 'Power Circuit 1 Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][5].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][5].Watts }}'
+
+      iotawatt_channel_6:
+        friendly_name: 'Power Circuit 2 Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][6].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][6].Watts }}'
+
+      iotawatt_channel_7:
+        friendly_name: 'Power Circuit 3 Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][7].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][7].Watts }}'
+
+      iotawatt_channel_8:
+        friendly_name: 'Power Circuit 4 Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][8].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][8].Watts }}'
+
+      iotawatt_channel_9:
+        friendly_name: 'Oven Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][9].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][9].Watts }}'
+
+      iotawatt_channel_10:
+        friendly_name: 'Air Con Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][10].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][10].Watts }}'
+
+      iotawatt_channel_11:
+        friendly_name: 'Shed Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][11].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][11].Watts }}'
+
+      iotawatt_channel_12:
+        friendly_name: 'Bore Red Phase Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][12].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][12].Watts }}'
+
+      iotawatt_channel_13:
+        friendly_name: 'Bore White Phase Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][13].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][13].Watts }}'
+
+      iotawatt_channel_14:
+        friendly_name: 'Bore Blue Phase Power Consumption'
+#        friendly_name_template: 'Channel {{ states.sensor.iotawatt.attributes["inputs"][14].channel }}'
+        unit_of_measurement: 'W'
+        value_template: '{{ states.sensor.iotawatt.attributes["inputs"][14].Watts }}'
+
+
+      iotawatt_grid_total:
+        friendly_name: "IoTaWatt Total Grid Power"
+        unit_of_measurement: 'W'
+        value_template: "{{ '%.2f'|format(((states('sensor.iotawatt_channel_1') | float ) + (states('sensor.iotawatt_channel_2') | float ) + (states('sensor.iotawatt_channel_3') | float ))) }}"
+
+      iotawatt_bore_total:
+        friendly_name: "Total Bore Power"
+        unit_of_measurement: 'W'
+        value_template: "{{ '%.0f'|format(((states('sensor.iotawatt_channel_12') | float ) + (states('sensor.iotawatt_channel_13') | float ) + (states('sensor.iotawatt_channel_14') | float ))) }}"
+
+      iotawatt_total_house_consumption:
+        friendly_name: "Total House Consumption"
+        unit_of_measurement: 'W'
+        value_template: "{{ '%.0f'|format(((states('sensor.iotawatt_channel_4') | float ) + (states('sensor.iotawatt_channel_5') | float ) + (states('sensor.iotawatt_channel_6') | float ) + (states('sensor.iotawatt_channel_7') | float ) + (states('sensor.iotawatt_channel_8') | float ) + (states('sensor.iotawatt_channel_9') | float ) + (states('sensor.iotawatt_channel_10') | float ) + (states('sensor.iotawatt_channel_11') | float ) + (states('sensor.iotawatt_channel_12') | float ) + (states('sensor.iotawatt_channel_13') | float ) + (states('sensor.iotawatt_channel_14') | float ))) }}"
+
+#  - platform: integration
+#    source: sensor.iotawatt_grid_total
+#    name: net_energy
+#    unit_prefix: k
+#    round: 2
