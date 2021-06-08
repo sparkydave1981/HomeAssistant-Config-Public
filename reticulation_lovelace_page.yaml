@@ -1,0 +1,89 @@
+  - background: center / cover no-repeat url("/local/images/back_garden_1.jpg") fixed
+    cards:
+      - entities:
+          - input_boolean.retic_program1_enable
+          - script.retic_program1_run
+          - entities:
+              - input_boolean.retic_program1_start_time1_enable
+            entity: input_datetime.retic_program1_start_time_1
+            type: 'custom:multiple-entity-row'
+          - entities:
+              - input_boolean.retic_program1_start_time2_enable
+            entity: input_datetime.retic_program1_start_time_2
+            type: 'custom:multiple-entity-row'
+          - group.retic_program1_watering_days
+          - group.retic_program1_run_times
+        show_header_toggle: false
+        title: Program 1
+        type: entities
+      - entities:
+          - input_boolean.retic_program2_enable
+          - script.retic_program2_run
+          - entities:
+              - input_boolean.retic_program2_start_time1_enable
+            entity: input_datetime.retic_program2_start_time_1
+            type: 'custom:multiple-entity-row'
+          - entities:
+              - input_boolean.retic_program2_start_time2_enable
+            entity: input_datetime.retic_program2_start_time_2
+            type: 'custom:multiple-entity-row'
+          - group.retic_program2_watering_days
+          - group.retic_program2_run_times
+        show_header_toggle: false
+        title: Program 2
+        type: entities
+      - entities:
+          - input_boolean.retic_station_1_run
+          - input_boolean.retic_station_2_run
+          - script.retic_stop_all
+        show_header_toggle: false
+        title: Manual Control
+        type: entities
+      - entities:
+          - input_number.allowable_rain_percentage
+          - input_number.allowable_rain_quantity
+          - card:
+              entity: input_boolean.retic_rain_parameters_met
+              type: 'custom:hui-toggle-entity-row'
+            restrictions:
+              block: true
+            row: true
+            type: 'custom:restriction-card'
+          - input_boolean.retic_rain_override
+        show_header_toggle: false
+        title: Rain Settings
+        type: entities
+      - entities:
+          - entity: binary_sensor.retic_controller_status
+            secondary_info: last-changed
+          - card:
+              entity: switch.retic_station_1_valve
+              secondary_info: last-changed
+              type: 'custom:hui-toggle-entity-row'
+            restrictions:
+              block: true
+            row: true
+            type: 'custom:restriction-card'
+          - card:
+              entity: switch.retic_station_2_valve
+              secondary_info: last-changed
+              type: 'custom:hui-toggle-entity-row'
+            restrictions:
+              block: true
+            row: true
+            type: 'custom:restriction-card'
+          - card:
+              entity: switch.retic_bore_control
+              secondary_info: last-changed
+              type: 'custom:hui-toggle-entity-row'
+            restrictions:
+              block: true
+            row: true
+            type: 'custom:restriction-card'
+          - entity: binary_sensor.retic_bore_running
+            secondary_info: last-changed
+        show_header_toggle: false
+        title: Status
+        type: entities
+    icon: 'mdi:fountain'
+    title: Retic
