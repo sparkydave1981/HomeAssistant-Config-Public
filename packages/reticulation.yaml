@@ -303,7 +303,7 @@ automation:
       - service: input_number.set_value
         data_template:
           entity_id: input_number.actual_rainfall_last_24h
-          value: "{{ states('sensor_perth_rain_since_9am') }}"
+          value: "{{ states('sensor_perth_rain_since_9am') | float }}"
 
 
   - id: 9b6631e1-6fd4-4643-8bfb-cd4b9648df2f
