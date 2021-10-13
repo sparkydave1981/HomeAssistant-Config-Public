@@ -1,1 +1,76 @@
+esphome:
+  name: ha_retic_controller_1
+  platform: ESP8266
+  board: nodemcuv2
 
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
+    static_ip: 192.168.0.61
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0
+
+api:
+
+logger:
+
+web_server:
+  port: 80
+
+ota:
+  password: !secret ota_password
+
+switch:
+  - platform: gpio
+    name: "Retic Station 1 Valve"
+    id: s1
+    icon: mdi:water-pump
+    pin: 
+      number: D1
+      inverted: true
+
+  - platform: gpio
+    name: "Retic Station 2 Valve"
+    id: s2
+    icon: mdi:water-pump
+    pin: 
+      number: D2
+      inverted: true
+
+#  - platform: gpio
+#    name: "Retic Station 3 Valve"
+#    id: s3
+#    icon: mdi:water-pump
+#    pin: 
+#      number: D5
+#      inverted: true
+
+#  - platform: gpio
+#    name: "Retic Station 4 Valve"
+#    id: s4
+#    icon: mdi:water-pump
+#    pin: 
+#      number: D3   
+#      inverted: true
+
+  - platform: gpio
+    name: "Retic Bore Control"
+    id: p1
+    icon: mdi:water-pump
+    pin: 
+      number: D7
+      inverted: true
+    restore_mode: RESTORE_DEFAULT_OFF
+
+binary_sensor:
+  - platform: gpio
+    name: "Retic Bore Running"
+#    icon: mdi:location-exit
+    pin: 
+      number: D6   
+      inverted: false
+#      mode: INPUT_PULLUP
+
+  - platform: status
+    name: "Retic Controller Status"
