@@ -1,4 +1,3 @@
-# HomeAssistant-Config-Public
 # Dave's Home Assistant configuration
 
 My irrigation setup uses an ESP8266 running ESPhome connected to 2x dual relay boards.  I have 2 relays connected to solenoids (the relays switch 24Vac) and a third which energises a bore pump contactor.  There is then an auxiliary contact on the contactor wired to an input on the ESP to provide running feedback.
