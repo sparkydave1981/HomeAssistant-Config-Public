@@ -4,7 +4,7 @@
 My irrigation setup uses an ESP8266 running ESPhome connected to 2x dual relay boards.  I have 2 relays connected to solenoids (the relays switch 24Vac) and a third which energises a bore pump contactor.  There is then an auxiliary contact on the contactor wired to an input on the ESP to provide running feedback.
 In our area we are only allowed to water the garden on certain days (based on out house number) and between certain hours of the day, so the schedule is determined by those factors.  I also use a local weather service to check the rain likihood and quantity to prevent watering if rain is expected or has already fallen.
 
-## Hardware (not as neat as I would like it but I'm still sorting out power supply issues)
+## Hardware \(not as neat as I would like it but I'm still sorting out power supply issues)
 
 ![20211013_074955](https://user-images.githubusercontent.com/7628509/137044546-3356bbfb-4410-4b25-893c-0e220ba69560.jpg)
 ![20211013_075023](https://user-images.githubusercontent.com/7628509/137044560-dffdd19c-a86e-48d3-874f-e6f05dbf3e9f.jpg)
